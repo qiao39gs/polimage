@@ -273,6 +273,27 @@ function saveApiKey() {
   alert('API 密钥已保存！');
 }
 
+// Connect with Pollinations (BYOP)
+function connectPollinations() {
+  const redirectUrl = encodeURIComponent(window.location.href.split('#')[0]);
+  window.location.href = `https://enter.pollinations.ai/authorize?redirect_url=${redirectUrl}`;
+}
+
+// Check for API key in URL hash (BYOP callback)
+function checkAuthCallback() {
+  if (window.location.hash) {
+    const params = new URLSearchParams(window.location.hash.slice(1));
+    const apiKey = params.get('api_key');
+    if (apiKey) {
+      state.apiKey = apiKey;
+      localStorage.setItem('pollinations_api_key', apiKey);
+      // Clean URL
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+      alert('Pollinations 账户已连接！');
+    }
+  }
+}
+
 // Generate image
 async function generateImage() {
   const prompt = document.getElementById('prompt').value.trim();
@@ -505,6 +526,7 @@ async function generateBatch() {
 
 // Initialize
 function init() {
+  checkAuthCallback();
   renderParamsPanel();
   renderResultPanel();
   renderHistoryPanel();
