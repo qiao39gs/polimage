@@ -73,7 +73,7 @@ pollinations/
 
 ## API 参考
 
-本项目使用 Pollinations API。完整 API 文档请参阅 `api.json`（OpenAPI 3.1.0 格式）。
+本项目使用 Pollinations API。完整 API 文档请参阅 [Pollinations官方文档](https://enter.pollinations.ai/api/docs)
 
 ## 致谢
 
