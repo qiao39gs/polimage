@@ -512,6 +512,20 @@
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
+    /* Custom scrollbar styles */
+    .sidebar-content::-webkit-scrollbar {
+      width: 6px;
+    }
+    .sidebar-content::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .sidebar-content::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 3px;
+    }
+    .sidebar-content::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
+    }
   </style>
 </head>
 <body>
