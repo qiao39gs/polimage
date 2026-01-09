@@ -236,6 +236,7 @@ function renderBatchResultPanel() {
 // Render history panel
 function renderHistoryPanel() {
   let content = '';
+  let footer = '';
   if (state.history.length === 0) {
     content = `
       <div class="history-empty">
@@ -255,12 +256,16 @@ function renderHistoryPanel() {
           </div>
         `).join('')}
       </div>
-      <button class="btn btn-secondary" style="width:100%;margin-top:16px;" onclick="clearHistory()">清除历史</button>
     `;
+    footer = `
+      <div class="sidebar-footer">
+        <button class="btn btn-secondary" style="width:100%;" onclick="clearHistory()">清除历史</button>
+      </div>`;
   }
   document.getElementById('history-panel').innerHTML = `
     <div class="sidebar-header"><h2>历史记录 (${state.history.length})</h2></div>
     <div class="sidebar-content">${content}</div>
+    ${footer}
   `;
 }
 
