@@ -35,7 +35,7 @@ const defaults = {
   height: 512,
   seed: -1,
   enhance: false,
-  nologo: false,
+  nologo: true,
   safe: false,
   quality: 'medium'
 };
@@ -130,7 +130,7 @@ function renderParamsPanel() {
         </div>
         <div class="checkbox-group">
           <label class="checkbox-label"><input type="checkbox" id="enhance">优化提示词</label>
-          <label class="checkbox-label"><input type="checkbox" id="nologo">无水印</label>
+          <label class="checkbox-label"><input type="checkbox" id="nologo" checked>无水印</label>
           <label class="checkbox-label"><input type="checkbox" id="safe">安全模式</label>
           <label class="checkbox-label"><input type="checkbox" id="transparent">透明背景</label>
         </div>
