@@ -472,8 +472,8 @@ async function generateBatch() {
 
   renderBatchResultPanel();
 
-  // Generate images concurrently (max 3 at a time)
-  const concurrency = 3;
+  // Generate images concurrently (max 9 at a time)
+  const concurrency = 9;
   const results = [];
 
   for (let i = 0; i < state.batchCount; i += concurrency) {
