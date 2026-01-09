@@ -4,6 +4,7 @@
 
 ## 功能特性
 
+- **BYOP 授权** - 支持 Pollinations OAuth 快速授权，一键连接账户
 - **多种 AI 模型** - 支持 flux、turbo、z-image、gptimage、seedream 等多种模型
 - **批量生成** - 一次生成 2、4、6 或 9 张图片，支持并发处理
 - **可定制参数** - 控制尺寸、种子、质量、引导系数等
@@ -23,11 +24,11 @@
 
 2. 在浏览器中打开 `index.html`
 
-3. 从 [https://enter.pollinations.ai](https://enter.pollinations.ai) 获取 API 密钥(需申请**可发布密钥**（`pk_`）- 用于客户端)
+3. 获取 API 密钥（二选一）：
+   - **快速授权**：点击设置中的「连接 Pollinations 账户」按钮，完成 OAuth 授权
+   - **自定义密钥**：从 [enter.pollinations.ai](https://enter.pollinations.ai) 获取密钥（需选择 Publishable Key），手动输入
 
-4. 点击页面顶部的 API 密钥按钮，输入你的密钥
-
-5. 输入提示词，开始生成！
+4. 输入提示词，开始生成！
 
 ## 项目结构
 
