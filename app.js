@@ -42,7 +42,7 @@ const defaults = {
 
 // Available models (image only)
 const imageModels = [
-  'z-image-turbo', 'z-image', 'zimage', 'flux', 'turbo',
+  'z-image-turbo', 'z-image', 'zimage', 'flux','klein' ,'klein-large' , 'turbo',
   'gptimage', 'gptimage-large', 'kontext',
   'seedream', 'seedream-pro', 'nanobanana', 'nanobanana-pro'
 ];
