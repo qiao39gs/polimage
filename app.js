@@ -40,12 +40,34 @@ const defaults = {
   quality: 'medium'
 };
 
-// Available models (image only)
-const imageModels = [
-  'z-image-turbo', 'z-image', 'zimage', 'flux','klein' ,'klein-large' , 'turbo',
+// Available models (image only) - fetched dynamically from API
+let imageModels = [];
+let imageModelDetails = [];
+
+// Fallback models in case API fails
+const fallbackModels = [
+  'z-image-turbo', 'z-image', 'zimage', 'flux', 'klein', 'klein-large', 'turbo',
   'gptimage', 'gptimage-large', 'kontext',
   'seedream', 'seedream-pro', 'nanobanana', 'nanobanana-pro'
 ];
+
+// Fetch models from API
+async function fetchImageModels() {
+  try {
+    const res = await fetch('https://gen.pollinations.ai/image/models');
+    if (!res.ok) throw new Error('Failed to fetch models');
+    const models = await res.json();
+    // Filter for image output models only
+    imageModelDetails = models.filter(m =>
+      m.output_modalities && m.output_modalities.includes('image')
+    );
+    imageModels = imageModelDetails.map(m => m.name);
+  } catch (e) {
+    console.warn('Failed to fetch models, using fallback:', e);
+    imageModels = fallbackModels;
+    imageModelDetails = [];
+  }
+}
 
 // Quality options
 const qualityOptions = ['low', 'medium', 'high', 'hd'];
@@ -71,9 +93,12 @@ function closeModal() {
 
 // Render params panel
 function renderParamsPanel() {
-  const modelOpts = imageModels.map(m =>
-    `<option value="${m}" ${m === defaults.model ? 'selected' : ''}>${m}</option>`
-  ).join('');
+  const modelOpts = imageModels.map(m => {
+    const detail = imageModelDetails.find(d => d.name === m);
+    const label = detail ? `${m} - ${detail.description}` : m;
+    const selected = m === defaults.model ? 'selected' : '';
+    return `<option value="${m}" ${selected}>${label}</option>`;
+  }).join('');
   const qualityOpts = qualityOptions.map(q =>
     `<option value="${q}" ${q === defaults.quality ? 'selected' : ''}>${q}</option>`
   ).join('');
@@ -530,11 +555,14 @@ async function generateBatch() {
 }
 
 // Initialize
-function init() {
+async function init() {
   checkAuthCallback();
-  renderParamsPanel();
   renderResultPanel();
   renderHistoryPanel();
+
+  // Fetch models from API, then render params panel
+  await fetchImageModels();
+  renderParamsPanel();
 
   // Close modal on overlay click
   document.getElementById('apiModal').addEventListener('click', (e) => {
